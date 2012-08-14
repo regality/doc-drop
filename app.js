@@ -36,16 +36,6 @@ app.configure(function() {
     ];
     io.set('transports', transports);
 
-    var opts = {
-      host: 'localhost'
-    };
-    var store = new (socketIO.RedisStore)({
-      redisClient: opts,
-      redisPub: opts,
-      redisSub: opts
-    });
-    io.set('store', store);
-
     // minify and compress the client script
     io.set('browser client minification', true);
     io.set('browser client gzip', true);
