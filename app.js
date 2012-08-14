@@ -3,7 +3,7 @@
 var express = require('express')
   , socketIO = require('socket.io')
   , routes = require('./routes')
-  , port = 3000
+  , port = 8080
 
 var app = module.exports = express.createServer();
 
