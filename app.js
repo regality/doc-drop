@@ -63,6 +63,6 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 
-app.listen(3000, function() {
+app.listen(port, function() {
   console.log("Server listening on port %d in %s mode", port, app.settings.env);
 });
