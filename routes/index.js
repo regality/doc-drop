@@ -5,7 +5,7 @@
 
 exports.index = function(req, res){
   res.render('index', {
-    title: 'Express',
+    title: "Drag n' Drop",
     name: req.query.name || ''
   })
 };
