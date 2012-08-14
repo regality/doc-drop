@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 Name:
+    input#name.input-xlarge.h1(placeholder='Your Name', value=name)
+
+  .target.well
+    h2 Share
+
+  .documents
+    .document.well
+      .title Hello World
+      .text Lorem ipsum and other stuff.
+
+    .document.well
+      .title That One Paper
+      .text Once upon a midnight dreary as I pondered weak and weary.
+
+  #editor(style='display:none')
+    input.input-xlarge(placeholder='Title...')
+    br
+    br
+    textarea
+    button.btn.btn-primary#save Save
+    button.btn.btn-danger#cancel Cancel
+
+append scripts
+  script(src="/js/main.js")

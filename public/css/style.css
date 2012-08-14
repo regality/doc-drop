@@ -1,0 +1,67 @@
+body {
+  padding: 50px;
+  padding-left: 120px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+input.h1 {
+  font-size: 30px;
+  font-weight: bold;
+  border: 3px solid white;
+  height: 35px;
+}
+
+input.h1:focus {
+  border: 3px solid black;
+}
+
+.target {
+  width: 500px;
+  height: 400px;
+  position: fixed;
+  top: 100px;
+  left: -440px;
+  border: 1px solid black;
+  background: #ccddff;
+}
+
+.target h2 {
+  float: right;
+}
+
+.target.target-hover {
+  border: 3px solid black;
+  background: #ffffff;
+}
+
+.documents {
+  position: relative;
+}
+
+.document {
+  float: left;
+  width: 150px;
+  height: 180px;
+  border: 1px solid black;
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+}
+
+.document .title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.document .text {
+  font-size: 8px;
+}
+
+#editor textarea {
+  width: 560px;
+  height: 250px;
+}
