@@ -1,8 +1,15 @@
 "use strict";
 
+var id = [ Math.floor(Math.random() * 1e20)
+         , Math.floor(Math.random() * 1e20)
+         , Math.floor(Math.random() * 1e20)
+         , Math.floor(Math.random() * 1e20)
+         , Math.floor(Math.random() * 1e20)].join('-');
+
 function getDoc(ele) {
   ele = $(ele);
   var doc = {
+    author: currentName(),
     title: ele.find('.title').filter(':first').text(),
     text: ele.find('.text').filter(':first').text()
   };
@@ -17,17 +24,23 @@ function updateDoc(ele, title, text) {
 
 function createDoc(doc) {
   var html = [
-    '<div class="document well" style="display:none;">',
+    '<div class="document well">',
       '<div class="title">',
         doc.title,
+      '</div>',
+      '<div class="author">',
+        doc.author,
       '</div>',
       '<div class="text">',
         doc.text,
       '</div>',
     '</div>'
   ].join('');
+  console.log(html);
   html = $(html);
-  $(".documents").prepend(html);
+  html.hide();
+  draggable(html);
+  $(".inner-documents").prepend(html);
   html.animate({width: 'show'}, 'slow');
 }
 
@@ -35,16 +48,22 @@ function currentName() {
   return $('#name').val() || 'Guest';
 }
 
-(function ($) {
-  $.fn.liveDraggable = function (opts) {
-    this.live("mouseover", function() {
-      if (!$(this).data("init")) {
-        $(this).data("init", true).draggable(opts);
-      }
-    });
-    return $();
-  };
-}(jQuery));
+function draggable(ele) {
+  ele
+  .draggable({
+    revert: 'valid',
+    appendTo: 'body'
+  })
+  .touch({
+     animate: false,
+     sticky: false,
+     dragx: true,
+     dragy: true,
+     rotate: false,
+     resort: true,
+     scale: false
+   });
+}
 
 $(function() {
   var socket = io.connect();
@@ -54,48 +73,51 @@ $(function() {
   });
 
   socket.on('new doc', function(data) {
-    if (data.name === currentName()) return;
+    if (data.id === id) return;
     createDoc(data.doc);
   });
 
-  $('.document').liveDraggable({
-    revert: 'valid'
-  });
+  draggable($('.document'))
 
-  $('.target').droppable({
-    hoverClass: 'target-hover',
+  $('.share').droppable({
+    hoverClass: 'share-hover',
     accept: '.document',
-    drop: function(e) {
-      var doc = getDoc(e.srcElement);
+    drop: function(e, ui) {
+      var ele = ui.draggable;
+      var doc = getDoc(ele);
       socket.emit('share', {
-        name: currentName(),
+        id: id,
         doc: doc
       });
     }
   });
 
-  $('.document').live('click', function() {
-    var $editor = $('#editor');
-    var ele = this;
-    var doc = getDoc(ele);
-    $editor.find('input').val(doc.title);
-    $editor.find('textarea').val(doc.text);
-    $('#save').click(function() {
-      updateDoc(
-        ele,
-        $editor.find('input').val(),
-        $editor.find('textarea').val()
-      );
-      $editor.dialog('close');
-    });
-    $('#cancel').click(function() {
-      $editor.dialog('close');
-    });
-    $editor.dialog({
-      height: 400,
-      width: 600,
-      modal: true
-    });
+  $('.dummy').droppable({
+    // force docs to revert
+  });
+
+  $('.edit').droppable({
+    hoverClass: 'edit-hover',
+    accept: '.document',
+    drop: function(e, ui) {
+      var $editor = $('#editor');
+      var ele = ui.draggable;
+      var doc = getDoc(ele);
+      $editor.find('input').val(doc.title);
+      $editor.find('textarea').val(doc.text);
+      $editor.fadeIn();
+      $('#save').unbind('click').click(function() {
+        updateDoc(
+          ele,
+          $editor.find('input').val(),
+          $editor.find('textarea').val()
+        );
+        $editor.fadeOut();
+      });
+      $('#cancel').unbind('click').click(function() {
+        $editor.fadeOut();
+      });
+    }
   });
 
 });

@@ -1,6 +1,6 @@
 body {
-  padding: 50px;
-  padding-left: 120px;
+  margin: 0px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -8,18 +8,25 @@ a {
   color: #00B7FF;
 }
 
+h1 {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+}
+
 input.h1 {
   font-size: 30px;
   font-weight: bold;
   border: 3px solid white;
   height: 35px;
+  border: 1px solid #eee;
 }
 
 input.h1:focus {
   border: 3px solid black;
 }
 
-.target {
+.share {
   width: 500px;
   height: 400px;
   position: fixed;
@@ -29,39 +36,86 @@ input.h1:focus {
   background: #ccddff;
 }
 
-.target h2 {
+.share h2 {
   float: right;
 }
 
-.target.target-hover {
+.share.share-hover {
   border: 3px solid black;
   background: #ffffff;
 }
 
 .documents {
-  position: relative;
+  width: 50%;
+  height: 100%;
+  z-index: 0;
 }
 
-.document {
+.inner-documents {
+  padding: 100px;
+  padding-right: 10px;
+}
+
+.dummy {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 50%;
+  height: 100%;
+}
+
+.edit {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 50%;
+  height: 100%;
+  z-index: 0;
+}
+
+.edit-hover {
+  z-index: 0;
+  background: rgba(240, 240, 240, .5);
+}
+
+.inner-edit {
+  padding: 100px;
+  padding-left: 10px;
+}
+
+.document.well {
   float: left;
-  width: 150px;
-  height: 180px;
-  border: 1px solid black;
+  width: 100px;
+  height: 120px;
   background: #eee;
   padding: 10px;
-  margin: 10px;
+  margin: 7px;
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
 }
 
 .document .title {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
+  border-bottom: 1px solid #ddd;
+  margin: 3px;
+}
+
+.document .author {
+  font-weight: bold;
+  font-size: 10px;
+  border-bottom: 1px solid #ddd;
+  margin: 3px;
 }
 
 .document .text {
   font-size: 8px;
+  line-height: 80%;
 }
 
 #editor textarea {
   width: 560px;
   height: 250px;
+  z-index: 100;
 }

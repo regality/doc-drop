@@ -4,27 +4,43 @@ block content
   h1 Name:
     input#name.input-xlarge.h1(placeholder='Your Name', value=name)
 
-  .target.well
+  .share.well
     h2 Share
 
   .documents
-    .document.well
-      .title Hello World
-      .text Lorem ipsum and other stuff.
+    .inner-documents
+      .document.well
+        .title Lorem Ipsum
+        .author= name
+        .text
+          | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          | Fusce nisl nunc, varius at dictum eu, viverra eu dolor.
+          | Donec rutrum nunc tincidunt quam lacinia scelerisque et ornare felis.
+          | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          | Maecenas dictum consectetur justo eget condimentum.
+          | Nunc ultricies, nibh vitae rutrum tempor,
+          | lorem enim tempor metus, quis sagittis sem lacus vel lectus.
 
-    .document.well
-      .title That One Paper
-      .text Once upon a midnight dreary as I pondered weak and weary.
+      .document.well
+        .title The Raven
+        .author= name
+        .text
+          | Once upon a midnight dreary as I pondered weak and weary,
+          | Over many a quaint and curious volume of forgotten lore.
+          | As I nodded, nearly napping, suddenly there came a tapping
+          | As if someone gently rapping, rapping on my chamber door.
+          | Tis some visitor I muttered, rapping on my chamber door.
+          | Only this and nothing more.
 
-  #editor(style='display:none')
-    input.input-xlarge(placeholder='Title...')
-    br
-    br
-    textarea
-    button.btn.btn-primary#save Save
-    button.btn.btn-danger#cancel Cancel
 
-append scripts
-  script(src="/js/touch.js")
-  script(src="/js/jquery.ui.touch-punch.min.js")
-  script(src="/js/main.js")
+  .dummy
+
+  .edit
+    .inner-edit
+      #editor(style='display:none')
+        input.input-xlarge(placeholder='Title...')
+        br
+        br
+        textarea
+        button.btn.btn-primary#save Save
+        button.btn.btn-danger#cancel Cancel
